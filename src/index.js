@@ -1,17 +1,30 @@
-const numGeneratorInput = document.querySelector("num-generator__input");
-const numGuessInput = document.querySelector("#num-guess__input");
-const numGuessButton = document.querySelector("#num-guess__form button");
+const clock = document.querySelector("#clock");
+const christmas = document.querySelector("#day-left");
 
-const result = document.querySelector("#result");
+function getClock() {
+  const date = new Date();
+  const year = String(date.getFullYear());
+  const month = String(date.getMonth()).padStart(2, "0");
+  const day = String(date.getDay()).padStart(2, "0");
+  const hour = String(date.getHours()).padStart(2, "0");
+  const minute = String(date.getMinutes()).padStart(2, "0");
+  const second = String(date.getSeconds()).padStart(2, "0");
+  clock.textContent = `현재시간 : ${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
 
-function setNumRange(event) {
-  event.preventDefault();
-  const machineNum = parseInt(numGeneratorInput.value);
-  const myNum = parseInt(numGuessInput.value);
-  const randNum = Math.ceil(Math.random() * machineNum);
-  result.innerText = `You chose ${myNum} . / The machine chose ${machieNum} .`;
-  console.log(randNum);
-  console.log(myNum);
+  const goalDate = new Date("December 25, 2021 00:00:00");
+  const decimalDate = Math.floor((goalDate - date) / 1000);
+  const decimalDay = String(Math.floor(decimalDate / (60 * 60 * 24)));
+  const decimalHour = String(Math.floor((decimalDate / 3600) % 24)).padStart(
+    2,
+    "0"
+  );
+  const decimalMinute = String(Math.floor((decimalDate / 60) % 60)).padStart(
+    2,
+    "0"
+  );
+  const decimalSecond = String((decimalDate % 60) + 1).padStart(2, "0");
+  christmas.textContent = `남은시간 : ${decimalDay}일 ${decimalHour}시간 ${decimalMinute}분 ${decimalSecond}초 남았습니다.`;
 }
 
-numGuessInput.addEventListener("submit", setNumRange);
+getClock();
+setInterval(getClock, 1000);
