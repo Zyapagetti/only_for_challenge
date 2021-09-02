@@ -24,9 +24,7 @@ const button = document.querySelector("button");
 function setBackground() {
   const gradientStart = colors[Math.floor(Math.random() * colors.length)];
   const gradientEnd = colors[Math.floor(Math.random() * colors.length)];
-  const bg = document.querySelector("body");
-  bg.style.background = `linear-gradient(90deg, ${gradientStart}, ${gradientEnd})`;
+  document.body.style.background = `linear-gradient(to right, ${gradientStart}, ${gradientEnd})`;
 }
 
-setBackground();
 button.addEventListener("click", setBackground);
